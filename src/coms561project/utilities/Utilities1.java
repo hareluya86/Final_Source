@@ -13,11 +13,10 @@ import org.hibernate.cfg.Configuration;
 
 import coms561project.data.*;
 
-public class Utilities {
+public class Utilities1 {
 
-    private SessionFactory sessionFactory;
-    private Session session;
-    private ArrayList<Category> testCategories;
+    private static SessionFactory sessionFactory = getSessionFactory();
+    private static ArrayList<Category> testCategories;
 
     /**
      * Gets a Category object by its ID
@@ -25,7 +24,7 @@ public class Utilities {
      * @param categoryId the ID
      * @return the Category
      */
-    public Category getCategoryById(int categoryId) {
+    public static Category getCategoryById(int categoryId) {
         //Test data
         if (testCategories == null) {
             return new Category();
@@ -37,6 +36,8 @@ public class Utilities {
                 return d;
             }
         }
+
+
         return new Category();
     }
 
@@ -46,7 +47,9 @@ public class Utilities {
      * @param searchString the user name
      * @return the ID of the Customer found in the query
      */
-    public int getCustomerIdByUserName(String searchString) {
+    public static int getCustomerIdByUserName(String searchString) {
+        SessionFactory sessionFactory;
+        Session session;
 
         sessionFactory = getSessionFactory();
         session = sessionFactory.openSession();
@@ -63,6 +66,7 @@ public class Utilities {
         int eps = query.list().size();
 
         //	AddNewCustomer eps = (AddNewCustomer)query.list();
+
         session.close();
         sessionFactory.close();
 
@@ -88,7 +92,7 @@ public class Utilities {
      * @param creditCardExpirationDate the credit card expiration date
      * @return the result of successfully creating a new customer
      */
-    public boolean addNewCustomer(long id, String userName, String password,
+    public static boolean addNewCustomer(long id, String userName, String password,
             String firstName, String lastName, String addressLine1,
             String addressLine2, String city, String state, String zipCode,
             String emailAddress, String phoneNumber, String creditCardNumber,
@@ -97,6 +101,9 @@ public class Utilities {
             return false;
         } else {
             try {
+                SessionFactory sessionFactory;
+                Session session;
+
                 sessionFactory = getSessionFactory();
                 session = sessionFactory.openSession();
 
@@ -108,6 +115,8 @@ public class Utilities {
                         addressLine2, city, state, zipCode,
                         emailAddress, phoneNumber, creditCardNumber,
                         creditCardExpirationDate);
+
+
                 session.save(C);
 
                 tx.commit();
@@ -116,6 +125,7 @@ public class Utilities {
             } catch (Exception e) {
                 return false;
             }
+
             return true;
         }
     }
@@ -127,7 +137,10 @@ public class Utilities {
      * @param password the password
      * @return a Customer if the user name and password are correct
      */
-    public Customer CustomerAuthentication(String userName, String password) {
+    public static Customer CustomerAuthentication(String userName, String password) {
+        SessionFactory sessionFactory;
+        Session session;
+
         sessionFactory = getSessionFactory();
         session = sessionFactory.openSession();
 
@@ -141,12 +154,14 @@ public class Utilities {
                     + "where EP.userName = '" + userName + "' and EP.password = '" + password + "'");
         }
 
-        ArrayList<Customer> eps = new ArrayList<Customer>(query.list());
+        ArrayList<Customer> eps = (ArrayList<Customer>) query.list();
 
         Customer c = null;
         if (eps.size() > 0) {
             c = eps.get(0);
         }
+        session.close();
+        sessionFactory.close();
 
         return c;
     }
@@ -161,19 +176,22 @@ public class Utilities {
      * @param c the root of the category tree to search
      * @return the category, if it exists
      */
-    private Category findCategory(int id, Category c) {
+    private static Category findCategory(int id, Category c) {
         if (c.getId() == id) {
             return c;
         }
+
         if (c.getSubcategories() == null) {
             return null;
         }
+
         for (Category d : c.getSubcategories()) {
             Category g = findCategory(id, d);
             if (g != null) {
                 return g;
             }
         }
+
         return null;
     }
     /*
@@ -185,7 +203,7 @@ public class Utilities {
      *
      * @return a list of categories
      */
-    public List<Category> getTopCategories() {
+    public static List<Category> getTopCategories() {
         /*
          * //Test data ArrayList<Category> categories = new
          * ArrayList<Category>(); categories.add( new Category(2,
@@ -219,7 +237,14 @@ public class Utilities {
          *
          * return categories;
          */
-        
+
+
+
+
+
+        SessionFactory sessionFactory;
+        Session session;
+
         sessionFactory = getSessionFactory();
         session = sessionFactory.openSession();
 
@@ -227,11 +252,18 @@ public class Utilities {
 
         //Make sure the catalog exists
         if (query.list().isEmpty()) {
+            session.close();
+            sessionFactory.close();
+
             return new ArrayList<Category>();
         }
 
         //Only one catalog for this project
         Catalog catalog = (Catalog) query.list().get(0);
+
+        //Close down
+        session.close();
+        sessionFactory.close();
 
         return (List<Category>) catalog.getSubcategories();
 
@@ -242,7 +274,7 @@ public class Utilities {
      *
      * @return the bestselling products
      */
-    public List<Product> getBestSellers() {
+    public static List<Product> getBestSellers() {
 
         //Test data
         ArrayList<Product> products = new ArrayList<Product>();
@@ -288,7 +320,7 @@ public class Utilities {
      *
      * @return the new products
      */
-    public List<Product> getNewProducts() {
+    public static List<Product> getNewProducts() {
         //Test data
         ArrayList<Product> products = new ArrayList<Product>();
         ArrayList<ProductImage> productImages = new ArrayList<ProductImage>();
@@ -317,7 +349,7 @@ public class Utilities {
      * @param page the page of the results to retrieve
      * @return the list of items found by the query
      */
-    public List<Product> searchByName(String queryString, int resultSize, int page) {
+    public static List<Product> searchByName(String queryString, int resultSize, int page) {
         //Test data
         ArrayList<Product> products = new ArrayList<Product>();
         ArrayList<ProductImage> productImages = new ArrayList<ProductImage>();
@@ -361,13 +393,16 @@ public class Utilities {
      *
      * @return the SessionFactory
      */
-    private SessionFactory getSessionFactory(){
+    private static SessionFactory getSessionFactory() //throws Exception
+    {
         //Create a new global SessionFactory if one does not exist
         if (sessionFactory == null) {
             Configuration configuration = new Configuration();
             configuration.configure();
+
             sessionFactory = configuration.buildSessionFactory();
         }
+
         return sessionFactory;
     }
 
@@ -377,7 +412,7 @@ public class Utilities {
      * @param productId the ID of the product to retrieve
      * @return the product
      */
-    public Product getProductById(long productId) {
+    public static Product getProductById(long productId) {
         //Product nothing = new Product();
         if (productId == 1) {
             Date tempDate = new Date(2012, 1, 3);

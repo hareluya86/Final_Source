@@ -27,8 +27,8 @@ public class AccountLogin extends ActionSupport implements SessionAware {
 	
 
 	public String execute(){
-		
-		Customer user = Utilities.CustomerAuthentication(getUsername(), getPassword()); 
+		Utilities util = new Utilities();
+		Customer user = util.CustomerAuthentication(getUsername(), getPassword()); 
                 //Customer user = Utilities.CustomerAuthentication("null", "null"); 
 		if ( user == null )
 		{

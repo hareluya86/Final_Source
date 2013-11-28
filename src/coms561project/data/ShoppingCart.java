@@ -42,7 +42,7 @@ public class ShoppingCart {
 
 	public int getItemCount()
 	{
-		ArrayList<ShoppingCartItem> theitems = (ArrayList<ShoppingCartItem>)cartItems;
+		ArrayList<ShoppingCartItem> theitems = new ArrayList<ShoppingCartItem>(cartItems);
 		int itemcount = 0;
 		for(int i = 0; i < cartItems.size();i++)
 		{
@@ -70,7 +70,7 @@ public class ShoppingCart {
 	
 	public float totalPrice()
 	{
-		ArrayList<ShoppingCartItem> theitems = (ArrayList<ShoppingCartItem>)cartItems;
+		ArrayList<ShoppingCartItem> theitems = new ArrayList<ShoppingCartItem>(cartItems);
 		float totalprice = 0;
 		for(int i = 0; i < cartItems.size();i++)
 		{

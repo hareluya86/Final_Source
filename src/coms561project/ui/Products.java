@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import coms561project.data.Category;
 import coms561project.data.Product;
 import coms561project.utilities.Utilities;
+import java.util.List;
 
 /**
  * 
@@ -30,31 +31,33 @@ public class Products extends ActionSupport {
 		
 		if (categoryId == 0)  //Display new products
 		{
-			subcategories = (ArrayList<Category>)Utilities.getTopCategories();
-			products = (ArrayList<Product>)Utilities.getNewProducts();
+                    Utilities util = new Utilities();
+                    subcategories = new ArrayList<Category>(util.getTopCategories());
+			products = new ArrayList<Product>(util.getNewProducts());
 			
 			ActionContext.getContext().getSession().remove("breadcrumb");
 			this.breadcrumb = null;			
 		}
 		else				//Display the category
 		{
-			
-			Category category = Utilities.getCategoryById( categoryId );
+			Utilities util = new Utilities();
+			Category category = util.getCategoryById( categoryId );
 			categoryName = category.getName();
-			subcategories = (ArrayList<Category>)category.getSubcategories();
+			subcategories = new ArrayList<Category>(category.getSubcategories());
 			//products = (ArrayList<Product>)category.getProducts();
 			//Test Data
-			products = (ArrayList<Product>)Utilities.getNewProducts();
+			products = new ArrayList<Product>(util.getNewProducts());
 			
 			//Get the breadcrumb and check if we're going up or down the tree
 			boolean goingUp = false;
-			ArrayList<Category> breadcrumb = (ArrayList<Category>)ActionContext.getContext().getSession().get("breadcrumb");
-			if (breadcrumb == null)
-			{
+                        List<Category> rawBreadCrumbs = (List)ActionContext.getContext().getSession().get("breadcrumb");
+			
+			if (rawBreadCrumbs == null){
 				breadcrumb = new ArrayList<Category>();
 				breadcrumb.add(category);
-			}				
-				
+			}else{
+                            ArrayList<Category> breadcrumb = new ArrayList<Category>(rawBreadCrumbs);
+                        }
 			for (int i=0; i<breadcrumb.size(); i++)
 			{
 				if (breadcrumb.get(i).getId() == category.getId())
@@ -76,7 +79,7 @@ public class Products extends ActionSupport {
 				
 				if (breadcrumb.size() > 0)
 				{
-					for (Category c : Utilities.getTopCategories())
+					for (Category c : util.getTopCategories())
 					{
 						if (c.getId() == breadcrumb.get(0).getId())
 							matchedRootCategory = true;
@@ -86,13 +89,11 @@ public class Products extends ActionSupport {
 					}
 				}
 				
-				if (matchedRootCategory == true && matchedNewCategory == true)
-				{
+				if (matchedRootCategory == true && matchedNewCategory == true){
 					breadcrumb.clear();
 					breadcrumb.add(category);
 				}
-				else
-				{
+				else{
 					breadcrumb.add(category);
 				}
 				
@@ -100,7 +101,6 @@ public class Products extends ActionSupport {
 				this.breadcrumb = breadcrumb;
 			}
 		}
-		
 		return SUCCESS;
 	}
 

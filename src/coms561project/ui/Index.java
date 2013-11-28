@@ -20,8 +20,8 @@ public class Index extends ActionSupport {
 	 * @return the result
 	 */
 	public String execute() {
-		
-		newproducts = (ArrayList<Product>)Utilities.getNewProducts();
+		Utilities util = new Utilities();
+		newproducts = new ArrayList<Product>(util.getNewProducts());
 		
 		return SUCCESS;
 	}

@@ -35,7 +35,8 @@ public class ProductDetail extends ActionSupport {
 		}
 		
 		//Get the product
-		product = Utilities.getProductById(productId);	
+                Utilities util = new Utilities();
+		product = util.getProductById(productId);	
 		
 		return SUCCESS;
 	}

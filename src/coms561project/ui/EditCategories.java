@@ -20,23 +20,22 @@ import coms561project.data.ShoppingCartItem;
 import coms561project.utilities.Utilities;
 
 public class EditCategories extends ActionSupport {
-	
-	private static final long serialVersionUID = 1L;
-	private ArrayList<Category> categories;
-		
-	public String execute() throws Exception {
-		
-		//categories = (ArrayList<Category>)Utilities.getTopCategories();
-		categories = getCategories();
-		
-		return SUCCESS;
-	}
 
-	/**
-	 * @return the categories
-	 */
-	public ArrayList<Category> getCategories() {
-		return categories;
-	}	
-	
+    private static final long serialVersionUID = 1L;
+    private ArrayList<Category> categories;
+
+    public String execute() throws Exception {
+
+        //categories = (ArrayList<Category>)Utilities.getTopCategories();
+        categories = getCategories();
+
+        return SUCCESS;
+    }
+
+    /**
+     * @return the categories
+     */
+    public ArrayList<Category> getCategories() {
+        return categories;
+    }
 }

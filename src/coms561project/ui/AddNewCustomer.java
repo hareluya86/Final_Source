@@ -29,8 +29,8 @@ public class AddNewCustomer extends ActionSupport {
 	public String execute() throws Exception {
 
 		addedNewCustomer= true;		
-		
-		if (Utilities.addNewCustomer( id,  userName,  password,
+		Utilities util = new Utilities();
+		if (util.addNewCustomer( id,  userName,  password,
 				 firstName,  lastName,  addressLine1,
 				 addressLine2,  city,  state,  zipCode,
 				 emailAddress,  phoneNumber,  creditCardNumber,

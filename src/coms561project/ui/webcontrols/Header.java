@@ -12,9 +12,9 @@ public class Header extends ActionSupport {
 	private ArrayList<Category> categories;
 	
 	public String execute() throws Exception {
-		
+		Utilities util = new Utilities();
 		//categories = (ArrayList<Category>)Utilities.getTopCategories();
-		categories = new ArrayList<>(Utilities.getTopCategories());
+		categories = new ArrayList<Category>(util.getTopCategories());
 		return SUCCESS;
 	}
 
