@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC 
+"-//OpenSymphony Group//XWork Validator 1.0.2//EN"
+"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+        
+<validators>
+
+    <field name="author">
+        <field-validator type="requiredstring">
+            <param name="trim">true</param>
+			<message>Name is required</message>
+        </field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">20</param>
+			<message>Name cannot be greater than 20 characters</message>
+		</field-validator>
+    </field>
+	<field name="email">
+		<field-validator type="requiredstring">
+			<param name="trim">true</param>
+			<message>Email address is required</message>
+		</field-validator>
+		<field-validator type="email">
+			<message>Email address is not valid</message>
+		</field-validator>
+	</field>
+    <field name="subject">
+        <field-validator type="requiredstring">
+            <param name="trim">true</param>
+			<message>Subject is required</message>
+        </field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">40</param>
+			<message>Subject cannot be greater than 40 characters</message>
+		</field-validator>
+    </field>
+    <field name="body">
+        <field-validator type="requiredstring">
+            <param name="trim">true</param>
+			<message>Message is required</message>
+        </field-validator>
+		<field-validator type="stringlength">
+			<param name="maxLength">1000</param>
+			<message>Message cannot be greater than 1000 characters</message>
+		</field-validator>
+    </field>
+</validators>

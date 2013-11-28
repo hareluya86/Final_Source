@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <constant name="struts.devMode" value="true" />
+
+    <package name="coms561project" extends="struts-default">  
+    	<action name="default">
+    		<result>/default.jsp</result>
+    	</action>      
+
+        <action name="index" class="coms561project.ui.Index" method="execute">
+        	<result>/index.jsp</result>
+        </action>
+        
+        <action name="accountlogin">
+        	<result>/accountlogin.jsp</result>
+        </action>
+        
+        <action name="login" class="coms561project.ui.AccountLogin" method="execute">
+			<result name="success" type="redirect">checkout.action</result>
+			<result name="input">/accountlogin.jsp</result>
+		</action>
+        
+        <action name="about">
+        	<result>/about.jsp</result>
+        </action>
+                
+        <action name="checkout" class="coms561project.ui.CheckOut" method="execute">
+        	<result>/checkout.jsp</result>
+        	<result name="loginrequired" type="redirect">newcustomer.action</result>
+        	<result name="cartitemsrequired" type="redirect">shoppingcart.action</result>
+        </action>
+        
+        <action name="newcustomer">
+        	<result>/newcustomer.jsp</result>
+        </action>
+        
+        <action name="addnewcustomer" class="coms561project.ui.AddNewCustomer" method="execute">
+               	<result name="success">/newcustomer.jsp</result>
+               	<result name="input">/newcustomer.jsp</result>
+        </action>        
+        
+        <action name="contact">
+        	<result>/contact.jsp</result>
+        </action>
+
+        <action name="faqs">
+        	<result>/faqs.jsp</result>
+        </action>
+        
+		<action name="myaccount">
+        	<result>/myaccount.jsp</result>
+        </action>
+        
+        <action name="productdetail" class="coms561project.ui.ProductDetail" method="execute">
+        	<result name="success">/productdetail.jsp</result>
+        	<result name="error">/products.jsp</result>
+        </action>
+
+        <action name="products" class="coms561project.ui.Products" method="execute">
+        	<result>/products.jsp</result>
+        </action>
+        
+        <action name="search" class="coms561project.ui.Search" method="execute">
+        	<result>/search.jsp</result>
+        </action>
+        
+        <action name="sendfeedback" class="coms561project.ui.SendFeedback" method="execute">
+			<result name="input">/contact.jsp</result>
+        	<result name="success">/contact.jsp</result>
+        </action>
+        
+        <action name="shoppingcart">
+        	<result>/shoppingcart.jsp</result>
+        </action>
+        <action name="addtocart" class="coms561project.ui.AddToCart"
+        	method="execute">
+        	<param name="product"/>
+        	<result>/shoppingcart.jsp</result>
+        </action>
+        <action name="removefromcart" class="coms561project.ui.UpdateCart"
+        	method="execute">
+        	<param name="product" />
+        	<result>/shoppingcart.jsp</result>
+        </action>
+        
+        <action name="editcategories" >
+ 			<result>/default.jsp</result>
+ 		</action>
+
+    </package>
+    
+    <package name="coms561project-webcontrols" extends="struts-default">
+
+		<action name="webcontrol_bestsellers" class="coms561project.ui.webcontrols.BestSellers" method="execute">
+ 			<result>/webcontrols/bestsellers.jsp</result>
+ 		</action>
+    
+		<action name="webcontrol_categories" class="coms561project.ui.webcontrols.Categories" method="execute">
+ 			<result>/webcontrols/categories.jsp</result>
+ 		</action>
+ 		
+ 		<action name="webcontrol_footer">
+ 			<result>/webcontrols/footer.jsp</result>
+ 		</action>
+ 		
+		<action name="webcontrol_header" class="coms561project.ui.webcontrols.Header" method="execute">
+ 			<result>/webcontrols/header.jsp</result>
+ 		</action>
+ 
+ 	</package>    
+	
+</struts>
