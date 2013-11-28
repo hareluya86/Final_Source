@@ -71,7 +71,7 @@ ddsmoothmenu.init({
 <body>
 
 <div id="templatemo_wrapper">
-	    
+	<s:action name="webcontrol_header" executeResult="true" />	    
     <div id="templatemo_middle" class="carousel">
     	<div class="panel">
 				
@@ -131,12 +131,22 @@ ddsmoothmenu.init({
     
     <div id="templatemo_main">
 		<div id="sidebar" class="float_l">
+                    <s:action name="webcontrol_categories" executeResult="true" />	
+                    <s:action name="webcontrol_bestsellers" executeResult="true" />
 		</div>
 		
         <div id="content" class="float_r">
         	<h1>New Products</h1>
         	
-        	
+        	<s:iterator value="newproducts" status="product">
+                        <div class="product_box">
+                                <a href='<s:url action="productdetail"><s:param name="productId" value="id" /></s:url>'><img src='<s:property value="images[0].thumbnail" />' alt='<s:property value="name" />' /></a>
+                                <h3><s:property value="name" /></h3>
+                                <p class="product_price">$<s:property value="getText('{0,number,#,##0.00}',{salePrice})"/></p>
+                                <a href='<s:url action="shoppingcart"><s:param name="productId" value="id" /></s:url>' class="add_to_card">Add to Cart</a>
+                                <a href='<s:url action="productdetail"><s:param name="productId" value="id" /></s:url>' class="detail">Detail</a>
+                        </div>
+                </s:iterator>
         	
         	<!-- 
             <div class="product_box">
@@ -208,7 +218,7 @@ ddsmoothmenu.init({
     </div> <!-- END of templatemo_main -->
     
     	
-      
+      <s:action name="webcontrol_footer" executeResult="true" />	
 </div> <!-- END of templatemo_wrapper -->
 
 </body>

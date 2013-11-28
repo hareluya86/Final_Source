@@ -13,8 +13,8 @@ public class Header extends ActionSupport {
 	
 	public String execute() throws Exception {
 		
-		categories = (ArrayList<Category>)Utilities.getTopCategories();
-		
+		//categories = (ArrayList<Category>)Utilities.getTopCategories();
+		categories = new ArrayList<>(Utilities.getTopCategories());
 		return SUCCESS;
 	}
 

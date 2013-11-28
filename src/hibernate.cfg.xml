@@ -16,12 +16,12 @@
     <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 
     <!-- JDBC connection pool (use the built-in) -->
-    <property name="connection.pool_size">1</property>
-   <!--  <property name="hibernate.c3p0.min_size">5</property>
+    <!--<property name="connection.pool_size">1</property> -->
+    <property name="hibernate.c3p0.min_size">5</property>
     <property name="hibernate.c3p0.max_size">20</property>
     <property name="hibernate.c3p0.timeout">300</property>
     <property name="hibernate.c3p0.max_statements">50</property>
-    <property name="hibernate.c3p0.idle_test_period">3000</property>  -->
+    <property name="hibernate.c3p0.idle_test_period">3000</property> 
         
         <!-- Enable Hibernate's automatic session context management -->
     <!-- <property name="current_session_context_class">thread</property> -->    
@@ -36,16 +36,16 @@
         <property name="hbm2ddl.auto">update</property>
  
         
-        <mapping class = "My_Hibernate.Category"/>
-        <mapping class = "My_Hibernate.Customer"/>
-        <mapping class = "My_Hibernate.Employee"/>
-        <mapping class = "My_Hibernate.Product"/>
-        <mapping class = "My_Hibernate.ProductImage"/>
-        <mapping class = "My_Hibernate.ProductDetail"/>
-        <mapping class = "My_Hibernate.ProductRating"/>
-        <mapping class = "My_Hibernate.ShoppingCart"/>
-        <mapping class = "My_Hibernate.ShoppingCartItem"/> 
-        <mapping class = "My_Hibernate.Catalog"/>
+        <mapping class = "coms561project.data.Category"/>
+        <mapping class = "coms561project.data.Customer"/>
+        <mapping class = "coms561project.data.Employee"/>
+        <mapping class = "coms561project.data.Product"/>
+        <mapping class = "coms561project.data.ProductImage"/>
+        <mapping class = "coms561project.data.ProductDetail"/>
+        <mapping class = "coms561project.data.ProductRating"/>
+        <mapping class = "coms561project.data.ShoppingCart"/>
+        <mapping class = "coms561project.data.ShoppingCartItem"/> 
+        <mapping class = "coms561project.data.Catalog"/>
         
 <!--        <mapping resource="events/Person.hbm.xml"/>
  -->
