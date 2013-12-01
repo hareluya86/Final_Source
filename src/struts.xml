@@ -20,6 +20,7 @@
         <action name="login" class="coms561project.ui.AccountLogin" method="execute">
 			<result name="success" type="redirect">checkout.action</result>
 			<result name="input">/accountlogin.jsp</result>
+                        
 		</action>
         
         <action name="about">
@@ -30,6 +31,7 @@
         	<result>/checkout.jsp</result>
         	<result name="loginrequired" type="redirect">newcustomer.action</result>
         	<result name="cartitemsrequired" type="redirect">shoppingcart.action</result>
+                <result name="employee">shoppingcart.action</result>
         </action>
         
         <action name="newcustomer">
@@ -38,6 +40,7 @@
         
         <action name="addnewcustomer" class="coms561project.ui.AddNewCustomer" method="execute">
                	<result name="success">/newcustomer.jsp</result>
+                <result name="error">/newcustomer.jsp</result>
                	<result name="input">/newcustomer.jsp</result>
         </action>        
         
@@ -59,7 +62,8 @@
         </action>
 
         <action name="products" class="coms561project.ui.Products" method="execute">
-        	<result>/products.jsp</result>
+        	<result name="success">/products.jsp</result>
+                <result name="none">/products.jsp</result>
         </action>
         
         <action name="search" class="coms561project.ui.Search" method="execute">

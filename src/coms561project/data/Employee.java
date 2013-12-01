@@ -3,6 +3,7 @@
  */
 package coms561project.data;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,7 +13,7 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class Employee {
+public class Employee implements User, Serializable {
 
 	@Id 
 	@GeneratedValue

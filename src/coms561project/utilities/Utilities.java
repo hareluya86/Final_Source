@@ -25,19 +25,25 @@ public class Utilities {
      * @param categoryId the ID
      * @return the Category
      */
-    public Category getCategoryById(int categoryId) {
+    public Category getCategoryById(long categoryId) {
         //Test data
-        if (testCategories == null) {
+        /*if (testCategories == null) {
             return new Category();
         }
-
         for (Category c : testCategories) {
             Category d = findCategory(categoryId, c);
             if (d != null) {
                 return d;
             }
         }
-        return new Category();
+        return new Category();*/
+        Category result;
+        sessionFactory = getSessionFactory();
+        session = sessionFactory.openSession();
+        
+        result = (Category)session.get(Category.class, categoryId);
+        
+        return result;
     }
 
     /**
@@ -63,9 +69,6 @@ public class Utilities {
         int eps = query.list().size();
 
         //	AddNewCustomer eps = (AddNewCustomer)query.list();
-        session.close();
-        sessionFactory.close();
-
         return eps;
     }
 
@@ -96,7 +99,7 @@ public class Utilities {
         if (getCustomerIdByUserName(userName) != 0) {
             return false;
         } else {
-            try {
+            //try {
                 sessionFactory = getSessionFactory();
                 session = sessionFactory.openSession();
 
@@ -113,9 +116,9 @@ public class Utilities {
                 tx.commit();
 
                 session.close();
-            } catch (Exception e) {
+            /*} catch (Exception e) {
                 return false;
-            }
+            }*/
             return true;
         }
     }
@@ -127,7 +130,7 @@ public class Utilities {
      * @param password the password
      * @return a Customer if the user name and password are correct
      */
-    public Customer CustomerAuthentication(String userName, String password) {
+    public User CustomerAuthentication(String userName, String password) {
         sessionFactory = getSessionFactory();
         session = sessionFactory.openSession();
 
@@ -141,9 +144,17 @@ public class Utilities {
                     + "where EP.userName = '" + userName + "' and EP.password = '" + password + "'");
         }
 
-        ArrayList<Customer> eps = new ArrayList<Customer>(query.list());
+        ArrayList<User> eps = new ArrayList<>(query.list());
+        
+        //Customer and Employees are 2 separate entities, that's why when you login, only the customer table gets queried.
+        //Should have created an entity called USER and extend customers and employees so that login can be processed equally
+        if(eps == null || eps.isEmpty()){
+            query = session.createQuery("from Employee EP "
+                    + "where EP.userName = '" + userName + "' and EP.password = '" + password + "'");
+            eps = new ArrayList<>(query.list());
+        }
 
-        Customer c = null;
+        User c = null;
         if (eps.size() > 0) {
             c = eps.get(0);
         }
@@ -162,6 +173,7 @@ public class Utilities {
      * @return the category, if it exists
      */
     private Category findCategory(int id, Category c) {
+        
         if (c.getId() == id) {
             return c;
         }
@@ -175,6 +187,7 @@ public class Utilities {
             }
         }
         return null;
+        
     }
     /*
      * TEST
@@ -379,7 +392,7 @@ public class Utilities {
      */
     public Product getProductById(long productId) {
         //Product nothing = new Product();
-        if (productId == 1) {
+        /*if (productId == 1) {
             Date tempDate = new Date(2012, 1, 3);
             //ProductImage tempImage = new ProductImage("None", "None");
             //Collection<ProductImage> tempImages = null;
@@ -429,5 +442,7 @@ public class Utilities {
             return nothing;
 
         }
+        */
+        return null;
     }
 }

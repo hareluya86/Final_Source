@@ -5,101 +5,104 @@
         
 <validators>
 
-	<field name="userName">
-		<field-validator type="requiredstring">
-			<param name="trim">true</param>
-			<message>user name is required</message>
-		</field-validator>
+    <field name="userName">
+        <field-validator type="requiredstring">
+            <param name="trim">true</param>
+            <message>user name is required</message>
+        </field-validator>
 		
-		<field-validator type="stringlength">
-			<param name="maxLength">25</param>
-			<message>User Name cannot be greater than 25 characters</message>
-		</field-validator>
-	</field>
+        <field-validator type="stringlength">
+            <param name="maxLength">25</param>
+            <message>User Name cannot be greater than 25 characters</message>
+        </field-validator>
+    </field>
     <field name="password">
         <field-validator type="requiredstring">
             <param name="trim">true</param>
-			<message>password is required</message>
+            <message>password is required</message>
         </field-validator>
         <field-validator type="stringlength">
-			<param name="maxLength">20</param>
-			<message>Password cannot be greater than 20 characters</message>
-		</field-validator>
+            <param name="maxLength">20</param>
+            <message>Password cannot be greater than 20 characters</message>
+        </field-validator>
     </field>
     <field name="firstName">
         <field-validator type="requiredstring">
             <param name="trim">true</param>
-			<message>First Name is required</message>
+            <message>First Name is required</message>
         </field-validator>
     </field>
     <field name="lastName">
         <field-validator type="requiredstring">
             <param name="trim">true</param>
-			<message>Last Name is required</message>
+            <message>Last Name is required</message>
         </field-validator>
     </field>
-   <field name="addressLine1">
+    <field name="addressLine1">
         <field-validator type="requiredstring">
             <param name="trim">true</param>
-			<message>Street Address is required</message>
+            <message>Street Address is required</message>
         </field-validator>
     </field>
-     <field name="city">
+    <field name="city">
         <field-validator type="requiredstring">
             <param name="trim">true</param>
-			<message>City is required</message>
+            <message>City is required</message>
         </field-validator>
     </field>
-     <field name="state">
+    <field name="state">
         <field-validator type="requiredstring">
             <param name="trim">true</param>
-			<message>State is required</message>
+            <message>State is required</message>
         </field-validator>
     </field>
-      <field name="zipCode">
+    <field name="zipCode">
         <field-validator type="requiredstring">
             <param name="trim">true</param>
-			<message>Zip code is required</message>
+            <message>Zip code is required</message>
         </field-validator>
     </field>
-      <field name="emailAddress">
+    <field name="emailAddress">
         <field-validator type="requiredstring">
             <param name="trim">true</param>
-			<message>Email address is required</message>			
+            <message>Email address is required</message>			
         </field-validator>
-        	<field-validator type="email">
-			<message>Email address is not valid</message>
-		</field-validator>        
+        <field-validator type="email">
+            <message>Email address is not valid</message>
+        </field-validator>        
     </field>
-      <field name="phoneNumber">
+    <field name="phoneNumber">
         <field-validator type="requiredstring">
             <param name="trim">true</param>
-			<message>Phone Number is required</message>
+            <message>Phone Number is required</message>
         </field-validator>
         <field-validator type="regex">
-			<param name="expression"><![CDATA[\d{3}-\d{3}-\d{4}]]></param>
-			<message>Phone number must be entered as 999-999-9999.</message>
-		</field-validator>
-        </field>
-          <field name="creditCardNumber">
+            <param name="expression"><![CDATA[\d{3}-\d{3}-\d{4}]]>
+            </param>
+            <message>Phone number must be entered as 999-999-9999.</message>
+        </field-validator>
+    </field>
+    <field name="creditCardNumber">
         <field-validator type="requiredstring">
             <param name="trim">true</param>
-			<message>Credit Card Number is required</message>
-			</field-validator>
-			<field-validator type="regex">
-			<param name="expression"><![CDATA[\d{16}]]></param>
-			<message>Credit Card number is not valid.</message>
-	        </field-validator>
-        </field>
-          <field name="creditCardExpirationDate">
-        <field-validator type="requiredstring">
-            <param name="trim">true</param>
-			<message>Credit Card Expiration Date is required</message>
+            <message>Credit Card Number is required</message>
         </field-validator>
         <field-validator type="regex">
-			<param name="expression"><![CDATA[\d{2}-\d{4}]]></param>
-			<message>Expiration Date must be in MM-YYYY form.</message>
-		</field-validator>
-        </field>
+            <param name="expression"><![CDATA[\d{16}]]>
+            </param>
+            <message>Credit Card number is not valid.</message>
+        </field-validator>
+    </field>
+    <field name="creditCardExpirationDate">
+        <field-validator type="requiredstring">
+            <param name="trim">true</param>
+            <message>Credit Card Expiration Date is required</message>
+        </field-validator>
+        <field-validator type="regex">
+            <param name="expression"><![CDATA[\d{2}-\d{4}]]>
+            </param>
+            <message>Expiration Date must be in MM-YYYY form.</message>
+        </field-validator>
+    </field>
     
 </validators>

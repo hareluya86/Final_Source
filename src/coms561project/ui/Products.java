@@ -18,7 +18,7 @@ public class Products extends ActionSupport {
 	
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Category> breadcrumb = new ArrayList<Category>();
-	private int categoryId;
+	private long categoryId;
 	private String categoryName;
 	private ArrayList<Category> subcategories;
 	private ArrayList<Product> products;
@@ -42,11 +42,14 @@ public class Products extends ActionSupport {
 		{
 			Utilities util = new Utilities();
 			Category category = util.getCategoryById( categoryId );
+                        if(category == null){
+                            return NONE;
+                        }
 			categoryName = category.getName();
 			subcategories = new ArrayList<Category>(category.getSubcategories());
 			//products = (ArrayList<Product>)category.getProducts();
 			//Test Data
-			products = new ArrayList<Product>(util.getNewProducts());
+			products = new ArrayList<Product>(category.getProducts());
 			
 			//Get the breadcrumb and check if we're going up or down the tree
 			boolean goingUp = false;
@@ -107,7 +110,7 @@ public class Products extends ActionSupport {
 	/**
 	 * @return the category
 	 */
-	public int getCategoryId() {
+	public long getCategoryId() {
 		return categoryId;
 	}
 
