@@ -6,19 +6,13 @@ import com.opensymphony.xwork2.ActionSupport;
 import coms561project.data.Product;
 import coms561project.utilities.Utilities;
 
-/**
- * 
- * @author Tim
- *
- */
+
 public class Index extends ActionSupport {
 	
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Product> newproducts;
 
-	/**
-	 * @return the result
-	 */
+
 	public String execute() {
 		Utilities util = new Utilities();
 		newproducts = new ArrayList<Product>(util.getNewProducts());
@@ -26,9 +20,7 @@ public class Index extends ActionSupport {
 		return SUCCESS;
 	}
 
-	/**
-	 * @return the newproducts
-	 */
+
 	public ArrayList<Product> getNewproducts() {
 		return newproducts;
 	}	

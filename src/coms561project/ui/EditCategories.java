@@ -26,15 +26,13 @@ public class EditCategories extends ActionSupport {
 
     public String execute() throws Exception {
 
-        //categories = (ArrayList<Category>)Utilities.getTopCategories();
+ 
         categories = getCategories();
 
         return SUCCESS;
     }
 
-    /**
-     * @return the categories
-     */
+
     public ArrayList<Category> getCategories() {
         return categories;
     }

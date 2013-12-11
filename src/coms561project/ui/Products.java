@@ -9,34 +9,28 @@ import coms561project.data.Product;
 import coms561project.utilities.Utilities;
 import java.util.List;
 
-/**
- * 
- * @author Tim
- *
- */
+
 public class Products extends ActionSupport {
 	
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Category> breadcrumb = new ArrayList<Category>();
+	private ArrayList<Category> maanmaan = new ArrayList<Category>();
 	private long categoryId;
 	private String categoryName;
 	private ArrayList<Category> subcategories;
 	private ArrayList<Product> products;
 		
-	/**
-	 * @return the result
-	 */
+	
 	public String execute() throws Exception {
 		
 		
-		if (categoryId == 0)  //Display new products
+		if (categoryId == 0)  
 		{
                     Utilities util = new Utilities();
                     subcategories = new ArrayList<Category>(util.getTopCategories());
 			products = new ArrayList<Product>(util.getNewProducts());
 			
-			ActionContext.getContext().getSession().remove("breadcrumb");
-			this.breadcrumb = null;			
+			ActionContext.getContext().getSession().remove("maanmaan");
+			this.maanmaan = null;			
 		}
 		else				//Display the category
 		{
@@ -47,44 +41,43 @@ public class Products extends ActionSupport {
                         }
 			categoryName = category.getName();
 			subcategories = new ArrayList<Category>(category.getSubcategories());
-			//products = (ArrayList<Product>)category.getProducts();
-			//Test Data
+		
 			products = new ArrayList<Product>(category.getProducts());
 			
-			//Get the breadcrumb and check if we're going up or down the tree
-			boolean goingUp = false;
-                        List<Category> rawBreadCrumbs = (List)ActionContext.getContext().getSession().get("breadcrumb");
 			
-			if (rawBreadCrumbs == null){
-				breadcrumb = new ArrayList<Category>();
-				breadcrumb.add(category);
+			boolean goingUp = false;
+                        List<Category> maanmaanlist = (List)ActionContext.getContext().getSession().get("maanmaan");
+			
+			if (maanmaanlist == null){
+				maanmaan = new ArrayList<Category>();
+				maanmaan.add(category);
 			}else{
-                            ArrayList<Category> breadcrumb = new ArrayList<Category>(rawBreadCrumbs);
+                            ArrayList<Category> maanmaan = new ArrayList<Category>(maanmaanlist);
                         }
-			for (int i=0; i<breadcrumb.size(); i++)
+			for (int i=0; i<maanmaan.size(); i++)
 			{
-				if (breadcrumb.get(i).getId() == category.getId())
+				if (maanmaan.get(i).getId() == category.getId())
 				{
 					goingUp = true;
-					breadcrumb = new ArrayList<Category>( breadcrumb.subList(0, i+1) );
-					ActionContext.getContext().getSession().put("breadcrumb", breadcrumb);
-					this.breadcrumb = breadcrumb;
+					maanmaan = new ArrayList<Category>( maanmaan.subList(0, i+1) );
+					ActionContext.getContext().getSession().put("maanmaan", maanmaan);
+					this.maanmaan = maanmaan;
 					break;
 				}
 			}
 			
-			//Append the new category on the end of the breadcrumb
+			
 			if (!goingUp)
 			{
-				//Make sure you're not navigating between top categories
+				
 				boolean matchedRootCategory = false;
 				boolean matchedNewCategory = false;
 				
-				if (breadcrumb.size() > 0)
+				if (maanmaan.size() > 0)
 				{
 					for (Category c : util.getTopCategories())
 					{
-						if (c.getId() == breadcrumb.get(0).getId())
+						if (c.getId() == maanmaan.get(0).getId())
 							matchedRootCategory = true;
 						
 						if (c.getId() == category.getId())
@@ -93,65 +86,49 @@ public class Products extends ActionSupport {
 				}
 				
 				if (matchedRootCategory == true && matchedNewCategory == true){
-					breadcrumb.clear();
-					breadcrumb.add(category);
+					maanmaan.clear();
+					maanmaan.add(category);
 				}
 				else{
-					breadcrumb.add(category);
+					maanmaan.add(category);
 				}
 				
-				ActionContext.getContext().getSession().put("breadcrumb", breadcrumb);
-				this.breadcrumb = breadcrumb;
+				ActionContext.getContext().getSession().put("maanmaan", maanmaan);
+				this.maanmaan = maanmaan;
 			}
 		}
 		return SUCCESS;
 	}
 
-	/**
-	 * @return the category
-	 */
+
 	public long getCategoryId() {
 		return categoryId;
 	}
 
-	/**
-	 * @param category the category to set
-	 */
+	
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
 
-	/**
-	 * @return the breadcrumb
-	 */
+
 	public ArrayList<Category> getBreadcrumb() {
-		return breadcrumb;
+		return maanmaan;
 	}
 
-	/**
-	 * @param breadcrumb the breadcrumb to set
-	 */
-	public void setBreadcrumb(ArrayList<Category> breadcrumb) {
-		this.breadcrumb = breadcrumb;
+
+	public void setBreadcrumb(ArrayList<Category> maanmaan) {
+		this.maanmaan = maanmaan;
 	}
 
-	/**
-	 * @return the subcategories
-	 */
 	public ArrayList<Category> getSubcategories() {
 		return subcategories;
 	}
 
-	/**
-	 * @return the products
-	 */
+	
 	public ArrayList<Product> getProducts() {
 		return products;
 	}
 
-	/**
-	 * @return the categoryName
-	 */
 	public String getCategoryName() {
 		return categoryName;
 	}

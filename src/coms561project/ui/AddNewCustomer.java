@@ -42,30 +42,21 @@ public class AddNewCustomer extends ActionSupport {
 		return SUCCESS;
 	}
 
-	/**
-	 * @return the addedNewEmployee
-	 */
+
 	public boolean isAddedNewCustomer() {
 		return addedNewCustomer;
 	}
 
-	/**
-	 * @param addedNewEmployee the addedNewEmployee to set
-	 */
+
 	public void setAddedNewCustomer(boolean addedNewCustomer) {
 		this.addedNewCustomer = addedNewCustomer;
 	}
 
-	/**
-	 * @return the addedNewEmployeeResult
-	 */
+	
 	public boolean isAddedNewCustomerResult() {
 		return addedNewCustomerResult;
 	}
 
-	/**
-	 * @param addedNewEmployeeResult the addedNewEmployeeResult to set
-	 */
 	public void setaddedNewCustomerResult(boolean addedNewCustomerResult) {
 		this.addedNewCustomerResult = addedNewCustomerResult;
 	}

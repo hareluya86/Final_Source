@@ -35,14 +35,11 @@ public class UpdateCart extends ActionSupport {
 
     }
 
-    /**
-     * @param aproduct the product to store.
-     */
     public void setProduct(int aproduct) {
         product = aproduct;
     }
 
-    //public float calculate
+
     public boolean checkForShoppingCart() {
         Map session = ActionContext.getContext().getSession();
 
@@ -54,17 +51,12 @@ public class UpdateCart extends ActionSupport {
         }
     }
 
-    /**
-     * @param item the shopping cart item being updated
-     * @param newquantity the new quantity of the item.
-     */
+
     public void changeQuantity(ShoppingCartItem item, int newquantity) {
         item.setQuantity(newquantity);
     }
 
-    /**
-     * @param aproductid the id of the product to be removed from the cart
-     */
+
     public void removeFromCart(int aproductid) {
 
         Map session = ActionContext.getContext().getSession();

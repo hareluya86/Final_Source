@@ -6,20 +6,14 @@ import com.opensymphony.xwork2.ActionSupport;
 import coms561project.data.Product;
 import coms561project.utilities.Utilities;
 
-/**
- *
- * @author Tim
- *
- */
+
 public class Search extends ActionSupport {
 
     private static final long serialVersionUID = 1L;
     private String searchText;
     private ArrayList<Product> searchResults;
 
-    /**
-     * @return the result
-     */
+   
     public String execute() throws Exception {
         Utilities util = new Utilities();
         searchResults = new ArrayList<Product>(util.searchByName(searchText, 10, 0));
@@ -27,23 +21,16 @@ public class Search extends ActionSupport {
         return SUCCESS;
     }
 
-    /**
-     * @return the searchText
-     */
+ 
     public String getSearchText() {
         return searchText;
     }
 
-    /**
-     * @param searchText the searchText to set
-     */
+
     public void setSearchText(String searchText) {
         this.searchText = searchText;
     }
 
-    /**
-     * @return the searchResults
-     */
     public ArrayList<Product> getSearchResults() {
         return searchResults;
     }

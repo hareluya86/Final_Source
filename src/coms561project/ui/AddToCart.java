@@ -26,16 +26,7 @@ public class AddToCart extends ActionSupport {
 
         String ret = SUCCESS;
         try {
-            /*
-             * // Test product. Date tempDate = new Date(2012, 1, 3);
-             * //ProductImage tempImage = new ProductImage("None", "None");
-             * Collection<ProductImage> tempImages = null;
-             * Collection<ProductRating> tempRatings = null;
-             * Collection<ProductDetail> tempDetails = null; Product testProd =
-             * new Product("1", "Nothing", "Is nothing", tempDate, (long)2,
-             * (float)3.37, (float)3.35, tempImages, tempRatings,
-	    				tempDetails);
-             */
+         
             Utilities util = new Utilities();
             Product thisproduct = util.getProductById(product);
             storeInCart(thisproduct, 1);
@@ -47,16 +38,12 @@ public class AddToCart extends ActionSupport {
 
     }
 
-    /**
-     * @param aproduct the product to store.
-     */
+
     public void setProduct(int aproduct) {
         product = aproduct;
     }
 
-    /**
-     * @return whether or not a shopping cart is currently stored in the session
-     */
+
     public boolean checkForShoppingCart() {
         Map session = ActionContext.getContext().getSession();
 
@@ -74,26 +61,23 @@ public class AddToCart extends ActionSupport {
         session.put("my_cart", (ShoppingCart) myCart);
     }
 
-    /**
-     * @param prod the product to be stored in the cart
-     * @param quantity the quantity of the product to be stored
-     */
+ 
     public void storeInCart(Product prod, int quantity) {
         Map session = ActionContext.getContext().getSession();
         if (checkForShoppingCart()) {
 
-            //ArrayList<ShoppingCartItem> contentstocheck = (ArrayList<ShoppingCartItem>)((ShoppingCart)session.get("my_cart")).getCartItems();
+          
             ShoppingCart cart = (ShoppingCart) session.get("my_cart");
             ArrayList<ShoppingCartItem> contentstocheck = new ArrayList<ShoppingCartItem>(cart.getCartItems());
             boolean quantityadded = false;
-            // Check if the item is already in the cart, and add to its quantity.
+  
             for (int i = 0; i < contentstocheck.size(); i++) {
                 if (contentstocheck.get(i).getProduct().getId() == prod.getId()) {
                     contentstocheck.get(i).setQuantity(contentstocheck.get(i).getQuantity() + 1);
                     quantityadded = true;
                 }
             }
-            // If the item isn't found, add it with quantity 1.
+         
             if (!quantityadded) {
                 ShoppingCartItem newItem = new ShoppingCartItem();
                 newItem.setProduct(prod);
@@ -104,7 +88,7 @@ public class AddToCart extends ActionSupport {
             }
             session.put("my_cart", (ShoppingCart) myCart);
         } else {
-            //myCart = new ShoppingCart();
+           
             makeShoppingCart();
             ShoppingCartItem newItem = new ShoppingCartItem();
             newItem.setProduct(prod);

@@ -258,6 +258,7 @@ public class Utilities {
     public List<Product> getBestSellers() {
 
         //Test data
+        /*
         ArrayList<Product> products = new ArrayList<Product>();
         ArrayList<ProductImage> productImages = new ArrayList<ProductImage>();
         productImages.add(new ProductImage(1, "images/templatemo_image_01.jpg", "images/templatemo_image_01.jpg"));
@@ -273,27 +274,19 @@ public class Utilities {
         products.add(new Product(6, "111-116", "Owl", "It hoots", null, 0, 40, 30, productImages, null, null));
 
         return products;
+        * 
+        */
 
-        /*
-         *
-         * SessionFactory sessionFactory; Session session;
-         *
-         * sessionFactory = getSessionFactory(); session =
-         * sessionFactory.openSession();
-         *
-         * Query query = session.createQuery("from Product P " + "order by
-         * P.numCustomerPurchases desc"); query.setMaxResults(7);
-         *
-         * //No products if (query.list().isEmpty()) { session.close();
-         * sessionFactory.close();
-         *
-         * return new ArrayList<Product>(); }
-         *
-         * //Close down session.close(); sessionFactory.close();
-         *
-         * return (List<Product>)query.list();
-         */
-
+        
+        SessionFactory sessionFactory; Session session;
+         
+        sessionFactory = getSessionFactory(); 
+        session = sessionFactory.openSession();
+        Query query = session.createQuery("from Product P " + "order by P.numCustomerPurchases desc"); query.setMaxResults(7);
+        
+        ArrayList<Product> results = new ArrayList<Product>(query.list());
+        
+        return results;
     }
 
     /**

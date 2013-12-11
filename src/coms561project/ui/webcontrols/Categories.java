@@ -16,9 +16,7 @@ public class Categories extends ActionSupport {
         return SUCCESS;
     }
 
-    /**
-     * @return the top categories
-     */
+
     public ArrayList<Category> getCategories() {
         return categories;
     }

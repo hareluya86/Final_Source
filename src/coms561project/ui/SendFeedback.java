@@ -11,11 +11,7 @@ import javax.mail.internet.MimeMessage;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-/**
- * 
- * @author Tim
- *
- */
+
 public class SendFeedback extends ActionSupport {
 	
 	private static final long serialVersionUID = 1L;
@@ -39,9 +35,7 @@ public class SendFeedback extends ActionSupport {
 		properties.put("mail.smtp.port", "465");
 	}
 		
-	/**
-	 * @return the result
-	 */
+
 	public String execute() throws Exception {
 		feedbackSent = true;
 		
@@ -59,7 +53,7 @@ public class SendFeedback extends ActionSupport {
 	         Message message = new MimeMessage(session);
 	         message.setFrom(new InternetAddress(email));
 	         message.setRecipients(Message.RecipientType.TO, 
-	            InternetAddress.parse("lmiller@cs.iastate.edu"));
+	            InternetAddress.parse("alduaiji@iastate.edu"));
 	         message.setSubject(subject);
 	         message.setText(body + "\n\n" + author + "\n" + email);
 	         Transport.send(message);
@@ -76,72 +70,52 @@ public class SendFeedback extends ActionSupport {
 
 	}
 
-	/**
-	 * @return the feedbackSent
-	 */
+
 	public boolean isFeedbackSent() {
 		return feedbackSent;
 	}
 
-	/**
-	 * @return the feedbackSentSuccessful
-	 */
+
 	public boolean isFeedbackSentSuccessful() {
 		return feedbackSentSuccessful;
 	}
 
-	/**
-	 * @param author the author to set
-	 */
+	
 	public void setAuthor(String author) {
 		this.author = author;
 	}
 
-	/**
-	 * @param email the email to set
-	 */
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	/**
-	 * @param subject the subject to set
-	 */
+	
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
 
-	/**
-	 * @param message the message to set
-	 */
+	
 	public void setBody(String body) {
 		this.body = body;
 	}
 
-	/**
-	 * @return the author
-	 */
+	
 	public String getAuthor() {
 		return author;
 	}
 
-	/**
-	 * @return the email
-	 */
+
 	public String getEmail() {
 		return email;
 	}
 
-	/**
-	 * @return the subject
-	 */
+	
 	public String getSubject() {
 		return subject;
 	}
 
-	/**
-	 * @return the body
-	 */
+
 	public String getBody() {
 		return body;
 	}

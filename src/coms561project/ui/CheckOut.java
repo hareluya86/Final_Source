@@ -24,7 +24,7 @@ public class CheckOut extends ActionSupport {
             customer = (Customer) ActionContext.getContext().getSession().get("customer");
         }
         else{
-            return "loginrequired"; //user group not identified
+            return "loginrequired";
         }
         
         cart = (ShoppingCart) ActionContext.getContext().getSession().get("my_cart");
@@ -42,23 +42,16 @@ public class CheckOut extends ActionSupport {
         return SUCCESS;
     }
 
-    /**
-     * @return the customer
-     */
+  
     public Customer getCustomer() {
         return customer;
     }
 
-    /**
-     * @return the cart
-     */
     public ShoppingCart getCart() {
         return cart;
     }
 
-    /**
-     * @return the carttotal
-     */
+   
     public double getCarttotal() {
         return carttotal;
     }

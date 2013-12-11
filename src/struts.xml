@@ -5,7 +5,8 @@
     <constant name="struts.devMode" value="true" />
 
     <package name="coms561project" namespace="/" extends="struts-default">  
-    	<action name="default">
+    	<default-action-ref name="index" />
+        <action name="default">
     		<result>/default.jsp</result>
     	</action>      
 

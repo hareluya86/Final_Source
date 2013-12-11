@@ -16,15 +16,12 @@ public class BestSellers extends ActionSupport {
     public String execute() throws Exception {
         Utilities util = new Utilities();
         products = new ArrayList<Product>(util.getBestSellers());
-        //List<Product> temp = Utilities.getBestSellers();
-        //products = new ArrayList<Product>(temp);
+       
 
         return SUCCESS;
     }
 
-    /**
-     * @return the products
-     */
+
     public ArrayList<Product> getProducts() {
         return products;
     }

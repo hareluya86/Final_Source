@@ -31,7 +31,7 @@ public class test {
 		long j = 6;
 				
 		Date d = new Date();
-		Customer customer = new Customer("mo","111","Mo","Al","","","Ames","IA","50014","al@iastate.edu","515785555","11111","12/2012");
+		Customer customer = new Customer("maan","111","maan","Al","","","Ames","IA","50014","alduaiji@iastate.edu","5154411201","11111","12/2013");
 		ShoppingCart shopingcart = new ShoppingCart(null, customer);
 		ShoppingCartItem shoppingcartitem = new ShoppingCartItem(null, 1);
 		ProductDetail PD = new ProductDetail("Shoe", "Running Shoe");
@@ -45,8 +45,8 @@ public class test {
 		Product P = new Product("1", "Shoe", "Puma Shoe", d, j, 50, 30, ar, ar2, ar1);
 		ArrayList<Product> ar3 = new ArrayList<Product>();
 		ar3.add(P);
-		Employee E = new Employee("employee", "222", "Mo", "Didley", "Mo@iastate.edu");
-		Employee E2 = new Employee("employee2", "223", "Mo", "didley", "Mo@iastate.edu");
+		Employee E = new Employee("employee1", "1111", "al", "maan", "saad @iastate.edu");
+		Employee E2 = new Employee("employee2", "2222", "al", "maan", "saad@iastate.edu");
 		ArrayList<Employee>ar4 = new ArrayList<Employee>();
 		ar4.add(E);
 		ArrayList<Employee>ar5 = new ArrayList<Employee>();
