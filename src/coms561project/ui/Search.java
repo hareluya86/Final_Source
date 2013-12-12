@@ -16,7 +16,7 @@ public class Search extends ActionSupport {
    
     public String execute() throws Exception {
         Utilities util = new Utilities();
-        searchResults = new ArrayList<Product>(util.searchByName(searchText, 10, 0));
+        searchResults = new ArrayList<Product>(util.searchByName(searchText, 10, 1));
 
         return SUCCESS;
     }

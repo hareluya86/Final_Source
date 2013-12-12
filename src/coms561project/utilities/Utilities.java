@@ -361,8 +361,9 @@ public class Utilities {
         session =  sessionFactory.openSession();
         Query query = session.createQuery("from Product P " + "where P.name like :query or " 
                 + "P.description like :query " + "order by P.numCustomerPurchases desc"); 
-        query.setParameter("query",queryString + "%"); query.setMaxResults(resultSize);
-        query.setFirstResult(resultSize * page);
+        query.setParameter("query","%"+queryString + "%"); 
+        query.setMaxResults(resultSize);
+        //query.setFirstResult(resultSize * page);
         
         return query.list();
     }
@@ -372,7 +373,7 @@ public class Utilities {
      *
      * @return the SessionFactory
      */
-    private SessionFactory getSessionFactory(){
+    public SessionFactory getSessionFactory(){
         //Create a new global SessionFactory if one does not exist
         if (sessionFactory == null) {
             Configuration configuration = new Configuration();

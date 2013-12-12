@@ -5,16 +5,22 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 @Entity
+@SequenceGenerator(name="product_seq", initialValue=1, allocationSize=10)
 public class Product {
 
-	@Id
+	@Id @GeneratedValue(strategy=GenerationType.TABLE, generator="product_seq")
 	private long id;
 	private String partNumber;
 	private String name;
@@ -27,14 +33,17 @@ public class Product {
 	
 	@OneToMany
 	@JoinTable(name = "Product_ProductImage", joinColumns = @JoinColumn(name = "ProductId"), inverseJoinColumns = @JoinColumn(name = "ProductImageId") )
+        @Cascade({CascadeType.SAVE_UPDATE})
 	private Collection<ProductImage> images;
 	
 	@OneToMany
 	@JoinTable(name = "Product_ProductRating", joinColumns = @JoinColumn(name = "ProductId"), inverseJoinColumns = @JoinColumn(name = "ProductRatingId") )
+        @Cascade({CascadeType.SAVE_UPDATE})
 	private Collection<ProductRating> ratings;
 	
 	@OneToMany
 	@JoinTable(name = "Product_ProductDetail", joinColumns = @JoinColumn(name = "ProductId"), inverseJoinColumns = @JoinColumn(name = "ProductDetailId") )
+        @Cascade({CascadeType.SAVE_UPDATE})
 	private Collection<ProductDetail> details;
 	
 	public Product()
