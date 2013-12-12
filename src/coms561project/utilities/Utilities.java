@@ -296,7 +296,7 @@ public class Utilities {
      */
     public List<Product> getNewProducts() {
         //Test data
-        ArrayList<Product> products = new ArrayList<Product>();
+        /*ArrayList<Product> products = new ArrayList<Product>();
         ArrayList<ProductImage> productImages = new ArrayList<ProductImage>();
         productImages.add(new ProductImage(1, "images/templatemo_image_01.jpg", "images/templatemo_image_01.jpg"));
 
@@ -309,10 +309,23 @@ public class Utilities {
 
         productImages.set(0, new ProductImage(2, "images/product/07.jpg", "images/product/07.jpg"));
         products.add(new Product(6, "111-116", "Owl", "It hoots", null, 0, 40, 30, productImages, null, null));
+        */
 
-        return products;
+        //return products;
+        return getNewProducts(9);
 
-
+    }
+    
+    public List<Product> getNewProducts(int num) { 
+        SessionFactory sessionFactory; Session session;
+         
+        sessionFactory = getSessionFactory(); 
+        session = sessionFactory.openSession();
+        Query query = session.createQuery("from Product P " + "order by P.dateAdded desc"); query.setMaxResults(num);
+        
+        ArrayList<Product> results = new ArrayList<Product>(query.list());
+        
+        return results;
     }
 
     /**
@@ -325,7 +338,7 @@ public class Utilities {
      */
     public List<Product> searchByName(String queryString, int resultSize, int page) {
         //Test data
-        ArrayList<Product> products = new ArrayList<Product>();
+         /*ArrayList<Product> products = new ArrayList<Product>();
         ArrayList<ProductImage> productImages = new ArrayList<ProductImage>();
         productImages.add(new ProductImage(1, "images/templatemo_image_01.jpg", "images/templatemo_image_01.jpg"));
 
@@ -339,27 +352,19 @@ public class Utilities {
         productImages.set(0, new ProductImage(2, "images/product/07.jpg", "images/product/07.jpg"));
         products.add(new Product(6, "111-116", "Owl", "It hoots", null, 0, 40, 30, productImages, null, null));
 
-        return products;
+        return products;*/
 
-        /*
-         * SessionFactory sessionFactory; Session session;
-         *
-         * sessionFactory = getSessionFactory(); session =
-         * sessionFactory.openSession();
-         *
-         * Query query = session.createQuery("from Product P " + "where P.name
-         * like :query or " + "P.description like :query " + "order by
-         * P.numCustomerPurchases desc"); query.setParameter("query",
-         * queryString + "%"); query.setMaxResults(resultSize);
-         * query.setFirstResult(resultSize * page);
-         *
-         * //No products if (query.list().isEmpty()) { session.close(); return
-         * new ArrayList<Product>(); }
-         *
-         * //Close down session.close(); sessionFactory.close();
-         *
-         * return (List<Product>)query.list();
-         */
+        
+        SessionFactory sessionFactory; 
+        Session session;
+        sessionFactory = getSessionFactory(); 
+        session =  sessionFactory.openSession();
+        Query query = session.createQuery("from Product P " + "where P.name like :query or " 
+                + "P.description like :query " + "order by P.numCustomerPurchases desc"); 
+        query.setParameter("query",queryString + "%"); query.setMaxResults(resultSize);
+        query.setFirstResult(resultSize * page);
+        
+        return query.list();
     }
 
     /**
